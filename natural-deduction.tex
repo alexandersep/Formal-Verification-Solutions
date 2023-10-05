@@ -1,0 +1,416 @@
+\documentclass{article} % latex file 
+\usepackage[margin={1in}]{geometry}
+\usepackage{logicproof}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+\title{CSU44004 Formal Verification: Natural Deduction Solutions}
+\author{By: Alexander Sepelenco}
+\date{} % no date
+
+\begin{document}
+
+\maketitle
+
+\section*{Note}
+
+This document will contain 8 years of natural deduction solutions ranging from 2021 to 2016.
+
+\section*{2021 Q2}
+
+I will create a helper proof for this problem to make it easier for myself.
+Use this proof as a reference as I will not repeat this proof in the solutions.\\
+I will call this rule $\neg\to\mathrm{e}$\\
+Prove: $\neg (p \to q) \vdash p \land \neg q$
+\begin{logicproof}{3}
+    \neg (p \to q) & premise\\
+    \begin{subproof}
+        \neg (p \land \neg q) & assumption\\
+        \begin{subproof}
+            p & assumption\\
+            \begin{subproof}
+                \neg q & assumption\\
+                p \land \neg q & $\land\mathrm{i}$, 3, 4\\
+                \bot & $\neg\mathrm{e}$, 5, 2
+            \end{subproof}
+            \neg\neg q & $\neg\mathrm{i}$, 4--6\\
+            q & $\neg\neg\mathrm{e}$, 6
+        \end{subproof}
+        p \to q & $\to\mathrm{i}$, 3--7\\
+        \bot & $\neg\mathrm{e}$, 9, 1
+    \end{subproof}
+    \neg\neg (p \land \neg q) & $\neg\mathrm{i}$, 2--10\\ 
+    p \land \neg q & $\neg\neg\mathrm{e}$, 12
+\end{logicproof}
+
+\newpage
+
+\paragraph{(a)}
+
+Prove: $\neg q, t \to q, \neg r \to \neg s, p \to u, \neg t \to \neg r, u \to s \vdash p \to x$
+\begin{logicproof}{1}
+    \neg q & premise\\
+    t \to q & premise\\
+    \neg r \to \neg s & premise\\
+    p \to u & premise\\
+    \neg t \to \neg r & premise\\
+    u \to s & premise\\
+    \begin{subproof}
+        \neg (p \to x) & assumption\\
+        p \land \neg x & $\neg\to\mathrm{e}$, 7\\
+        \neg t & $MT$, 1, 2\\
+        \neg r & $\to\mathrm{e}$, 9, 5\\
+        \neg s & $\to\mathrm{e}$, 10, 3\\
+        \neg u & $MT$, 11, 6\\
+        \neg p & $MT$, 12, 4\\
+        p & $\land\mathrm{e}_1$, 8\\
+        \bot & $\neg\mathrm{e}$, 14, 13
+    \end{subproof}
+    \neg\neg (p \to x) & $\neg\mathrm{i}$, 7--15\\
+    p \to x & $\neg\neg\mathrm{e}$, 16 
+\end{logicproof}
+
+\newpage
+
+\section*{2020 Q2}
+\paragraph{(a)}
+
+This solution is ever so slightly different to 2021 Q2 (a), so I will do it slightly differently
+for practice.\\
+Prove: $t \to q, \neg \to \neg s, p \to u, \neg t \to \neg r, u \to s \vdash p \to q$
+\begin{logicproof}{1}
+    t \to q & premise\\
+    \neg r \to \neg s & premise\\
+    p \to u & premise\\
+    \neg t \to \neg r & premise\\
+    u \to s & premise\\
+    \begin{subproof}
+        \neg (p \to q) & assumption\\
+        p \land \neg q & $\neg\to\mathrm{e}$, 6\\
+        \neg q & $\land\mathrm{e}_2$, 7\\
+        p & $\land\mathrm{e}_1$, 7\\
+        \neg t & $MT$, 8, 1\\
+        \neg r & $\to\mathrm{e}$, 10, 4\\
+        \neg s & $\to\mathrm{e}$, 11, 2\\
+        \neg u & $MT$, 12, 5\\
+        \neg p & $MT$, 13, 3\\
+        \bot & $\neg\mathrm{e}$, 14, 9 
+    \end{subproof}
+    \neg\neg (p \to q) & $\neg\mathrm{i}$, 6--16\\
+    p \to q & $\neg\neg\mathrm{e}$, 16 
+\end{logicproof}
+
+\section*{2019 Q3}
+\paragraph{(a) (i)}
+
+Prove: $\neg p \to r \vdash \neg r \to p$\\
+\begin{logicproof}{1}
+    \neg p \to r & premise\\
+    \begin{subproof}
+        \neg (\neg r \to p) & assumption\\
+        \neg r \land \neg p & $\neg\to\mathrm{e}$, 2\\
+        \neg p & $\land\mathrm{e}_2$, 3\\
+        r & $\to\mathrm{e}$, 4, 1\\
+        \neg r & $\land\mathrm{e}_1$, 3
+    \end{subproof}
+    \bot & $\neg\mathrm{e}$, 5, 6
+\end{logicproof}
+
+\paragraph{(a) (ii)}
+
+Prove: $\neg (p \to r) \to \neg q \vdash q \to p \to r$
+\begin{logicproof}{1}
+    \neg (p \to r) \to \neg q & premise\\
+    \begin{subproof}
+        \neg (q \to p \to r) & assumption\\
+        q \land \neg (p \to r) & $\neg\to\mathrm{e}$, 2\\
+        \neg (p \to r) & $\land\mathrm{e}_2$, 3\\
+        \neg q & $\to\mathrm{e}$, 4, 1\\
+        q & $\land\mathrm{e}_1$, 3\\
+        \bot & $\neg\mathrm{e}$, 6, 5
+    \end{subproof}
+    \neg \neg (q \to p \to r) & $\neg\mathrm{i}$, 2--7\\
+    q \to p \to r & $\neg\neg\mathrm{e}$, 8
+\end{logicproof}
+
+\section*{2019 Q1}
+\paragraph{(c) (i)}
+
+Prove: $p \land q \to \neg r \vdash r \to p \to \neg q$
+\begin{logicproof}{1}
+    p \land q \to \neg r & premise\\
+    \begin{subproof}
+        \neg (r \to p \to \neg q) & assumption\\
+        r \land \neg (p \to \neg q) & $\neg\to\mathrm{e}$, 2\\
+        r & $\land\mathrm{e}_1$, 3\\
+        \neg (p \to \neg q) & $\land\mathrm{e}_2$, 3\\
+        p \land \neg\neg q & $\neg\to\mathrm{e}$, 5\\
+        p & $\land\mathrm{e}_1$, 6\\
+        \neg\neg q & $\land\mathrm{e}_2$, 6\\
+        q & $\neg\neg\mathrm{e}$, 8\\
+        p \land q & $\land\mathrm{i}$, 7, 8\\
+        \neg r & $\to\mathrm{e}$, 10, 1\\
+        \bot & $\neg\mathrm{e}$, 4, 11
+    \end{subproof}
+    \neg\neg (r \to p \to \neg q) & $\neg\mathrm{i}$, 2--12\\
+    r \to p \to \neg q & $\neg\neg\mathrm{e}$, 13 
+\end{logicproof}
+\paragraph{(c) (ii)}
+Sorry, this question is our assignment. I cannot give the answer to this one.
+
+\section*{2018 Q1}
+\paragraph{(c) (i)}
+
+Prove: $\vdash \neg ((p \to \neg p) \land (\neg p \to p))$
+\begin{logicproof}{3}
+    \begin{subproof}
+        \neg (\neg ((p \to \neg p) \land (\neg p \to p))) & assumption\\
+        \begin{subproof}
+            (p \to \neg p) \land (\neg p \to p) & assumption\\
+            p \to \neg p & $\land\mathrm{e}_1$, 2\\
+            \neg p \to p & $\land\mathrm{e}_2$, 2\\
+            \begin{subproof}
+                p & assumption\\
+                \neg p & $\to\mathrm{e}$, 5, 3\\
+                \bot & $\neg\mathrm{e}$, 5, 6
+            \end{subproof}
+            \neg p & $\neg\mathrm{i}$, 5--7\\
+            p & $\to\mathrm{e}$, 8, 4\\
+            \bot & $\neg\mathrm{e}$, 9, 8
+        \end{subproof}
+        \neg ((p \to \neg p) \land (\neg p \to p)) & $\neg\mathrm{i}$, 2--11\\
+        \bot & $\neg\mathrm{e}$, 11, 1
+    \end{subproof}
+    \neg\neg (\neg ((p \to \neg p) \land (\neg p \to p))) & $\neg\mathrm{i}$, 1--12\\
+    \neg ((p \to \neg p) \land (\neg p \to p)) & $\neg\neg\mathrm{e}$, 13
+\end{logicproof}
+
+\newpage
+
+\paragraph{(c) (ii)}
+
+Prove: $p \to (q \lor r) \vdash (p \to q) \lor (p \to r)$
+\begin{logicproof}{2}
+    p \to (q \lor r) & assumption\\
+    \begin{subproof}
+        \neg ((p \to q) \lor (p \to r)) & assumption\\
+        \begin{subproof}
+            p \to q & assumption\\
+            (p \to q) \lor (p \to r) & assumption\\
+            \bot & $\neg\mathrm{e}$, 4, 5
+        \end{subproof}
+        \neg (p \to q) & $\neg\mathrm{i}$, 3--5\\
+        p \land \neg q & $\neg\to\mathrm{e}$, 6\\
+        p & $\land\mathrm{e}_1$, 7\\
+        (q \lor r) & $\to\mathrm{e}$, 8, 1\\
+        \neg q & $\land\mathrm{e}_2$, 7\\
+        \begin{subproof}
+            p \to r & assumption\\
+            (p \to q) \lor (p \to r) & $\lor\mathrm{i}_2$, 11\\
+            \bot & $\neg\mathrm{e}$, 12, 2
+        \end{subproof}
+        \neg (p \to r) & $\neg\mathrm{i}$, 11-13\\
+        p \land \neg r & $\neg\to\mathrm{e}$, 14\\
+        \neg r & $\land\mathrm{e}_2$, 15\\
+        \begin{subproof}
+            q & assumption\\
+            \neg q & copy 10\\
+            \bot & $\neg\mathrm{e}$, 17, 18
+        \end{subproof}
+        \begin{subproof}
+            r & assumption\\
+            \neg r & copy 16\\
+            \bot & $\neg\mathrm{e}$, 16 
+        \end{subproof}
+        \bot & $\lor\mathrm{e}$, 9, 17--9, 20-22
+    \end{subproof}
+    \neg\neg ((p \to q) \lor (p \to r)) & $\neg\mathrm{i}$, 2--23\\
+    (p \to q) \lor (p \to r) & $\neg\neg\mathrm{e}$, 24
+\end{logicproof}
+
+\section*{2017 Q1}
+
+\paragraph{(c) (i)}
+
+Prove: $p \to r \vdash \neg p \lor r$
+\begin{logicproof}{2}
+    p \to r & premise\\
+    \begin{subproof}
+    \neg (\neg p \lor r) & assumption\\
+        \begin{subproof}
+            p & assumption\\
+            r & $\to\mathrm{e}$, 3, 1\\
+            \neg p \lor r & $\lor\mathrm{i}_2$, 4\\
+            \bot & $\neg\mathrm{e}$, 5, 2
+        \end{subproof}
+        \neg p & $\neg\mathrm{i}$, 3--6\\
+        \neg p \lor r & $\lor\mathrm{i}_1$, 7\\
+        \bot & $\neg\mathrm{e}$, 8, 2
+    \end{subproof}
+    \neg\neg (\neg p \lor r) & $\neg\mathrm{i}$, 2--9\\
+    \neg p \lor r & $\neg\neg\mathrm{e}$, 10
+\end{logicproof}
+
+\newpage
+
+\paragraph{(c) (ii)}
+
+Prove: $(\neg p \to r), (r \to p), (p \to s) \vdash p \land s$
+\begin{logicproof}{2}
+    \neg p \to r & premise\\
+    r \to p & premise\\
+    p \to s & premise\\
+    \begin{subproof}
+        \neg (p \land s) & assumption\\
+        \begin{subproof}
+            p & assumption\\
+            s & $\to\mathrm{e}$, 5, 3\\
+            p \land s & $\land\mathrm{i}$, 5, 6\\
+            \bot & $\neg\mathrm{e}$, 7, 4
+        \end{subproof}
+        \neg p & $\neg\mathrm{i}$, 5--8\\
+        r & $\to\mathrm{e}$, 9, 1\\
+        p & $\to\mathrm{e}$, 10, 2\\
+        \bot & $\neg\mathrm{e}$, 11, 9
+    \end{subproof}
+    \neg\neg (p \land s) & $\neg\mathrm{i}$, 4--12\\
+    p \land s & $\neg\neg\mathrm{e}$, 13
+\end{logicproof}
+
+\section*{2016 Q1}
+I will prove Morgan's Theorem using natural deduction to use as a helper rule for the problem (ii).\\
+I will call this rule $DM_2$\\
+Prove: $\neg (p \lor q) \vdash \neg p \land \neg q$
+\begin{logicproof}{2}
+    \neg (p \lor q) & premise\\
+    \begin{subproof}
+        \neg (\neg p \land \neg q) & assumption\\
+        \begin{subproof}
+            p & assumption\\
+            p \lor q & $\lor\mathrm{i}_1$, 3\\
+            \bot & $\neg\mathrm{e}$, 4, 1
+        \end{subproof}
+        \neg p & $\neg\mathrm{i}$, 3--5\\
+        \begin{subproof}
+            q & assumption\\
+            p \lor q & $\lor\mathrm{i}_2$, 7\\
+            \bot & $\neg\mathrm{e}$, 8, 1
+        \end{subproof}
+        \neg q & $\neg\mathrm{i}$, 7--9\\
+        \neg p \land \neg q & $\land\mathrm{i}$, 6, 10\\
+        \bot & $\neg\mathrm{e}$, 11, 2
+    \end{subproof}
+    \neg\neg (\neg p \land \neg q) & $\neg\mathrm{i}$, 2--12\\
+    \neg p \land \neg q & $\neg\neg\mathrm{e}$, 13
+\end{logicproof}
+
+\newpage
+
+\paragraph{(d) (i)}
+
+Prove: $p \lor (q \land r) \vdash (p \lor q) \land (p \lor r)$
+\begin{logicproof}{3}
+    p \lor (q \land r) & premise\\
+    \begin{subproof}
+        \neg ((p \lor q) \land (p \lor r)) & assumption\\
+        \begin{subproof}
+            p \lor q & assumption\\
+            \begin{subproof}
+                p \lor r & assumption\\
+                (p \lor q) \land (p \lor r) & $\land\mathrm{i}$, 3, 4\\
+                \bot & $\neg\mathrm{e}$, 5, 2
+            \end{subproof}
+            \neg (p \lor r) & $\neg\mathrm{i}$, 4--6\\
+            \neg p \land \neg r & $DM_2$, 7\\
+            \neg p & $\land\mathrm{e}_1$, 8\\
+            \neg r & $\land\mathrm{e}_2$, 8\\
+            \begin{subproof}
+                p & assumption\\
+                \neg p & copy 9\\
+                \bot & $\neg\mathrm{e}$, 11, 12
+            \end{subproof}
+            \begin{subproof}
+                (q \lor r) & assumption\\
+                r & $\land\mathrm{e}_2$, 14\\
+                \bot & $\neg\mathrm{e}$, 15, 10
+            \end{subproof}
+            \bot & $\lor\mathrm{e}$, 1, 11--13, 14--16
+        \end{subproof}
+        \neg (p \lor q) & $\neg\mathrm{i}$, 2--17\\
+        \neg p \land \neg q & $DM_2$, 18\\
+        \neg p & $\land\mathrm{e}_1$, 19\\
+        \neg q & $\land\mathrm{e}_2$, 19\\
+        \begin{subproof}
+            p & assumption\\
+            \bot & $\neg\mathrm{e}$, 22, 20 
+        \end{subproof}
+        \begin{subproof}
+            (q \land r) & assumption\\
+            q & $\land\mathrm{e}_1$, 24\\
+            \bot & $\neg\mathrm{e}$, 24, 21 
+        \end{subproof}
+        \bot & $\lor\mathrm{e}$, 1, 22--23, 24--26
+    \end{subproof}
+    \neg\neg ((p \lor q) \land (p \lor r)) & $\neg\mathrm{i}$, 2--27\\
+    (p \lor q) \land (p \lor r) & $\neg\neg\mathrm{e}$, 28
+\end{logicproof}
+
+\paragraph{(d) (ii)}
+
+Prove: $\phi \land \neg \psi \to \neg \phi \vdash \phi \to \psi$
+\begin{logicproof}{1}
+    \phi \land \neg \psi \to \neg \phi & premise\\
+    \begin{subproof}
+        \neg (\phi \to \psi) & assumption\\
+        \phi \land \neg \psi & $\neg\to\mathrm{e}$, 2\\ 
+        \neg \phi & $\to\mathrm{e}$, 3, 1\\
+        \phi & $\land\mathrm{e}_1$, 3\\
+        \bot & $\neg\mathrm{e}$, 4, 5
+    \end{subproof}
+    \neg\neg (\phi \to \psi) & $\neg\mathrm{i}$, 2--6\\
+    \phi \to \psi & $\neg\neg\mathrm{e}$, 7
+\end{logicproof}
+
+\section*{2015 Q1}
+
+\paragraph{(e) (i)}
+
+Prove: $(\phi_1 \to \psi_1), (\neg \psi_2 \to \neg \phi_2) \vdash (\phi_1 \land \phi_2) \to (\phi_1 \lor \phi_2)$
+\begin{logicproof}{2}
+    (\phi_1 \to \psi_1) & premise\\
+    (\neg \psi_2 \to \neg \phi_2) & premise\\
+    \begin{subproof}
+        \neg ((\phi_1 \land \phi_2) \to (\psi_1 \lor \psi_2)) & assumption\\
+        \begin{subproof}
+            \phi_1 \land \phi_2 & assumption\\
+            \phi_1 & $\land\mathrm{e}_1$, 4\\
+            \psi_1 & $\to\mathrm{e}$, 5, 1\\
+            \psi_1 \lor \psi_2 & $\lor\mathrm{i}$, 6
+        \end{subproof}
+        (\phi_1 \land \phi_2) \to \psi_1 \lor \psi_2 & $\to\mathrm{i}$, 4--7\\
+        \bot & $\neg\mathrm{e}$, 8, 3
+    \end{subproof}
+    \neg\neg ((\phi_1 \land \phi_2) \to (\psi_1 \lor \psi_2)) & $\neg\mathrm{i}$, 3--9\\
+    (\phi_1 \land \phi_2) \to (\psi_1 \lor \psi_2) & $\neg\neg\mathrm{e}$, 10
+\end{logicproof}
+
+\paragraph{(e) (ii)}
+
+Prove: $\phi \to \neg \psi \vdash \psi \to \neg \phi$
+\begin{logicproof}{1}
+    \phi \to \neg \phi & premise\\
+    \begin{subproof}
+        \neg (\psi \to \neg \phi) & assumption\\
+        \psi \land \neg \neg \phi & $\neg\to\mathrm{e}$, 2\\
+        \neg\neg \phi & $\land\mathrm{e}_2$, 3\\
+        \phi & $\neg\neg\mathrm{e}$, 4\\
+        \neg \phi & $\to\mathrm{e}$, 5, 1\\
+        \bot & $\neg\mathrm{e}$, 5, 6
+    \end{subproof}
+    \neg\neg (\psi \to \neg \psi) & $\neg\mathrm{i}$, 2--7\\
+    \psi \to \neg \psi & $\neg\neg\mathrm{e}$, 8
+\end{logicproof}
+
+\end{document} 
