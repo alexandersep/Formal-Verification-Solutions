@@ -776,7 +776,7 @@ ensures z == y - x
     assert z == y - x;
 }
 
-// |-total (|0 <= x|) C (|T|) && |-partial (| 0 <= x |) C (|z = y - x|) ==> |-total (|0 <= n|) C (|z = y - x|)
+// |-total (|0 <= x|) C (|T|) && |-partial (| 0 <= x |) C (|z = y - x|) ==> |-total (|0 <= x|) C (|z = y - x|)
 // E = x >= 0
 // E0 = a
 method SubTotal(x: int, y: int) returns (z: int)
