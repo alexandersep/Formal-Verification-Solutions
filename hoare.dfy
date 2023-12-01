@@ -645,7 +645,13 @@ when m is not in sequence s
 ind at the end will either be -1 meaning we did not find m in the sequence s, or the index of m in the sequence s
 */
 
-/* This question is incomplete */
+function max(i: int, ind: int): int 
+{
+    if i < ind then ind else i
+}
+
+// E = 0 < |s| 
+// E0 = |s| - max(i, ind+1)
 method findIndexTotal(s: seq<int>, m: int) returns (ind: int)
 requires 0 < |s|
 ensures true
@@ -655,15 +661,22 @@ ensures true
     var i := 0;
     assert 0 < |s|;
     while i < |s| && ind < 0
-    decreases |s| - i - ind // unforunately it might decrease to below 0, so the proof is impossible
+    decreases |s| - max(i, ind+1)
     {
-        ghost var E0 := |s| - i - ind;
+        ghost var E0 := |s| - max(i, ind+1);
+        assert 0 <= |s| - max(i, ind+1);
+        assert ( (s[i] == m) ==> 0 < |s| && (0 <= |s| - max(i, i+1) < E0) ) && 
+               (!(s[i] == m) ==> 0 < |s| && (0 <= |s| - max(i+1, ind+1) < E0));
         if s[i] == m {
+            assert 0 < |s| && (0 <= |s| - max(i, i+1) < E0);
             ind := i;
+            assert 0 < |s| && (0 <= |s| - max(i, ind+1) < E0);
         } else {
+            assert 0 < |s| && (0 <= |s| - max(i+1, ind+1) < E0);
             i := i + 1;
+            assert 0 < |s| && (0 <= |s| - max(i, ind+1) < E0);
         }
-        //assert 0 < |s| && (|s| - (i + ind) < E0);
+        assert 0 < |s| && (0 <= |s| - max(i, ind+1) < E0);
     }
     assert true && !(i < |s| && ind < 0);
     assert true;
