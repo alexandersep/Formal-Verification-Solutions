@@ -186,7 +186,6 @@ ensures !f ==> !issortedPred(s)
     assert !f ==> !issortedPred(s);
 }
 
-
 /* Question 1 2020 */
 
 /*
@@ -241,7 +240,6 @@ ensures z == Pow(x, y)
     assert z == Pow(x, y - c) && 0 <= y && c == 0;
     assert z == Pow(x, y); 
 }
-
 
 /* Question 1 2019 */
 
@@ -520,7 +518,6 @@ ensures true
     assert true && !(k < a);
     assert true;
 }
-
 
 /* Question 3 2017 */
 
