@@ -1,3 +1,5 @@
+/* Created by Alexander Sepelenco */
+
 /* Question 1 2022 */
 
 /*
@@ -31,11 +33,6 @@ predicate isEven(i: nat)
 predicate isOdd(i: nat)
 {
     !isEven(i)
-}
-
-predicate postcondition(i: nat)
-{
-    forall c :: 0 <= c <= i && (isEven(i) || isOdd(i)) ==> (isEven(c) || isOdd(c))
 }
 
 // To prevent dafny from complaining I ensured x is a natural number. For (iv) the precondition would be x >= 0
