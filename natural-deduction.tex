@@ -16,7 +16,49 @@
 
 \section*{Note}
 
-This document will contain 8 years of natural deduction solutions ranging from 2021 to 2015.
+This document will contain 9 years of propositional natural deduction solutions ranging from 2022 to 2015.
+
+\section*{2022 Q2}
+
+\paragraph{a}
+
+Prove: $\vdash (A \to B) \lor (B \to A)$
+\begin{logicproof}{3}
+    \begin{subproof}
+        \neg ((A \to B) \lor (B \to A)) & assumption\\
+        \begin{subproof}
+            A \to B & assumption\\
+            ((A \to B) \lor (B \to A)) & $\lor\mathrm{i}_1$, ??\\
+            \bot & $\neg\mathrm{e}$, 3, 1
+        \end{subproof}
+        \neg (A \to B) & $\neg\mathrm{i}$, 2--4\\
+        \begin{subproof}
+            B & assumption\\
+            \begin{subproof}
+                A & assumption\\
+                B & copy 6
+            \end{subproof}
+            A \to B & $\to\mathrm{i}$, 7--8\\
+            \bot & $\neg\mathrm{e}$, 9, 5
+        \end{subproof}
+        \neg B & $\neg\mathrm{i}$, 6--10\\
+        \begin{subproof}
+            \neg A & assumption\\
+            \neg B & copy 11
+        \end{subproof}
+        \neg A \to \neg B & $\to\mathrm{i}$, 12--13\\
+        A & $\to\mathrm{e}$, 11, 14\\
+        \begin{subproof}
+            B & assumption\\
+            A & copy, 15
+        \end{subproof}
+        B \to A & $\to\mathrm{i}$, 15--16\\
+        (A \to B) \lor (B \to A) & $\lor\mathrm{i}_2$, 17\\
+        \bot & $\neg\mathrm{e}$, 18, 1 
+    \end{subproof}
+    \neg \neg ((A \to B) \lor (B \to A)) & $\neg\mathrm{i}$, ??\\
+    (A \to B) \lor (B \to A) & $\neg\neg\mathrm{e}$, ??
+\end{logicproof}
 
 \section*{2021 Q2}
 
