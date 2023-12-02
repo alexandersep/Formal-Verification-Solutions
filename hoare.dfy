@@ -25,16 +25,6 @@ when x == 5
 | 1 | 0 | 5 |
 */
 
-predicate isEven(i: nat)
-{
-    i % 2 == 0
-}
-
-predicate isOdd(i: nat)
-{
-    !isEven(i)
-}
-
 // To prevent dafny from complaining I ensured x is a natural number. For (iv) the precondition would be x >= 0
 method Par(x: nat) returns (z: nat)
 //requires 0 <= x // For total correctness, x can be int
