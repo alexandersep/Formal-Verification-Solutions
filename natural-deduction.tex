@@ -20,7 +20,7 @@ This document will contain 9 years of propositional natural deduction solutions 
 
 \section*{2022 Q2}
 
-\paragraph{a}
+\paragraph{(a)}
 
 Prove: $\vdash (A \to B) \lor (B \to A)$
 \begin{logicproof}{3}
@@ -28,7 +28,7 @@ Prove: $\vdash (A \to B) \lor (B \to A)$
         \neg ((A \to B) \lor (B \to A)) & assumption\\
         \begin{subproof}
             A \to B & assumption\\
-            ((A \to B) \lor (B \to A)) & $\lor\mathrm{i}_1$, ??\\
+            (A \to B) \lor (B \to A) & $\lor\mathrm{i}_1$, 2\\
             \bot & $\neg\mathrm{e}$, 3, 1
         \end{subproof}
         \neg (A \to B) & $\neg\mathrm{i}$, 2--4\\
@@ -47,18 +47,21 @@ Prove: $\vdash (A \to B) \lor (B \to A)$
             \neg B & copy 11
         \end{subproof}
         \neg A \to \neg B & $\to\mathrm{i}$, 12--13\\
-        A & $\to\mathrm{e}$, 11, 14\\
+        \neg \neg A & $MT$, 11, 14\\
+        A & $\neg\neg\mathrm{e}$, 15\\
         \begin{subproof}
             B & assumption\\
-            A & copy, 15
+            A & copy, 16
         \end{subproof}
-        B \to A & $\to\mathrm{i}$, 15--16\\
-        (A \to B) \lor (B \to A) & $\lor\mathrm{i}_2$, 17\\
-        \bot & $\neg\mathrm{e}$, 18, 1 
+        B \to A & $\to\mathrm{i}$, 17--18\\
+        (A \to B) \lor (B \to A) & $\lor\mathrm{i}_2$, 19\\
+        \bot & $\neg\mathrm{e}$, 20, 1 
     \end{subproof}
-    \neg \neg ((A \to B) \lor (B \to A)) & $\neg\mathrm{i}$, ??\\
-    (A \to B) \lor (B \to A) & $\neg\neg\mathrm{e}$, ??
+    \neg \neg ((A \to B) \lor (B \to A)) & $\neg\mathrm{i}$, 1--21\\
+    (A \to B) \lor (B \to A) & $\neg\neg\mathrm{e}$, 21 
 \end{logicproof}
+
+\newpage
 
 \section*{2021 Q2}
 
@@ -86,8 +89,6 @@ Prove: $\neg (p \to q) \vdash p \land \neg q$
     \neg\neg (p \land \neg q) & $\neg\mathrm{i}$, 2--10\\ 
     p \land \neg q & $\neg\neg\mathrm{e}$, 12
 \end{logicproof}
-
-\newpage
 
 \paragraph{(a)}
 
