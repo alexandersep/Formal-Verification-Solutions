@@ -47,17 +47,16 @@ Prove: $\vdash (A \to B) \lor (B \to A)$
             \neg B & copy 11
         \end{subproof}
         \neg A \to \neg B & $\to\mathrm{i}$, 12--13\\
-        \neg \neg A & $MT$, 11, 14\\
-        A & $\neg\neg\mathrm{e}$, 15\\
-        \begin{subproof}
+        \begin{subproof}        
             B & assumption\\
-            A & copy, 16
-        \end{subproof}
-        B \to A & $\to\mathrm{i}$, 17--18\\
-        (A \to B) \lor (B \to A) & $\lor\mathrm{i}_2$, 19\\
-        \bot & $\neg\mathrm{e}$, 20, 1 
+            \neg\neg A & $MT$, 15, 14\\
+            A & $\neg\neg\mathrm{e}$, 16
+        \end{subproof}        
+        B \to A & $\to\mathrm{i}$, 15--17\\
+        (A \to B) \lor (B \to A) & $\lor\mathrm{i}_2$, 18\\
+        \bot & $\neg\mathrm{e}$, 19, 1 
     \end{subproof}
-    \neg \neg ((A \to B) \lor (B \to A)) & $\neg\mathrm{i}$, 1--21\\
+    \neg \neg ((A \to B) \lor (B \to A)) & $\neg\mathrm{i}$, 1--20\\
     (A \to B) \lor (B \to A) & $\neg\neg\mathrm{e}$, 21 
 \end{logicproof}
 
