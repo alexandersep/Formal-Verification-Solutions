@@ -21,7 +21,7 @@ This document will contain 9 years of first order logic natural deduction soluti
 I will create helper proofs for future questions:\\
 $\neg\to\mathrm{e}$\\
 $\neg\forall x . A \to \exists x . \neg A$,\\
-$\neg\exists x . A \to \forall x . A$,\\
+$\neg\exists x . A \to \forall x . \neg A$,\\
 $\neg\exists x . A \to \exists x . \neg A$,\\
 $\neg\forall x . A \to \forall x . \neg A$\\
 $\forall x. \neg A \to \neg\forall x . A$,\\
@@ -247,22 +247,28 @@ Using proof of our rule similar to question.
 
 \paragraph{(ii)}
 Prove: $\vdash \exists x. (D(x) \to \forall y . D(y))$
-\begin{logicproof}{2}
+\begin{logicproof}{3}
     \begin{subproof}
         \neg \exists x. (D(x) \to \forall y . D(y)) & assumption\\
-        \exists x. \neg (D(x) \to \forall y . D(y)) & $\neg\exists x . A \to \exists x . \neg A$, 1\\
+        \forall x. \neg (D(x) \to \forall y . D(y)) & $\neg\exists x . A \to \forall x . \neg A$, 1\\
         \begin{subproof}
             xo & \\
-            \neg (D(xo) \to \forall y . D(y)) & assumption\\
+            \neg (D(xo) \to \forall y . D(y)) & $\forall\mathrm{e}$, 2\\
             D(xo) \land \neg \forall y . D(y) & $\neg\to\mathrm{e}$, 4\\
             D(xo) & $\land\mathrm{e}_1$, 5\\
             \exists y . D(y) & $\exists\mathrm{i}$, 6\\
             \neg \forall y . D(y) & $\land\mathrm{e}_2$, 5\\
             \exists y . \neg D(y) & $\neg\forall x . A \to \exists x . \neg A$, 8\\
-            \neg \exists y . D(y) & $\exists x . \neg A \to \neg\exists x . A$, 9\\
-            \bot & $\neg\mathrm{e}$, 7, 10 
+            \begin{subproof}
+                y0 & \\
+                \neg D(y0) & assumption\\
+                D(y0) & copy 6\\
+                \bot & $\neg\mathrm{e}$, 11, 12
+            \end{subproof}
+            \bot & $\exists\mathrm{e}$, 9, 10--13
         \end{subproof}
-        \bot & $\exists\mathrm{e}$, 2, 3--11
+        \forall x . \bot & $\forall\mathrm{i}$, 3--14\\
+        \bot & $\forall\mathrm{e}$, 15
     \end{subproof}
     \exists x. (D(x) \to \forall y . D(y)) & $PBC$, 1--12
 \end{logicproof}
