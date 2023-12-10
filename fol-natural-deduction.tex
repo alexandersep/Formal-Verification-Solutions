@@ -1,0 +1,724 @@
+\documentclass{article} % latex file 
+\usepackage[margin={1in}]{geometry}
+\usepackage{logicproof}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+\title{CSU44004 Formal Verification: First Order Logic Natural Deduction Solutions}
+\author{By: Alexander Sepelenco}
+\date{} % no date
+
+\begin{document}
+
+\maketitle
+
+\section*{Note}
+
+This document will contain 9 years of first order logic natural deduction solutions ranging from 2022 to 2015.
+
+I will create helper proofs for future questions:\\
+$\neg\to\mathrm{e}$\\
+$\neg\forall x . A \to \exists x . \neg A$,\\
+$\neg\exists x . A \to \forall x . \neg A$,\\
+%$\neg\exists x . A \to \exists x . \neg A$,\\
+%$\neg\forall x . A \to \forall x . \neg A$\\
+%$\forall x. \neg A \to \neg\forall x . A$,\\
+%$\exists x. \neg A \to \neg\exists x . A$,\\
+
+Prove: $\neg (p \to q) \vdash p \land \neg q$
+\begin{logicproof}{3}
+    \neg (p \to q) & premise\\
+    \begin{subproof}
+        \neg (p \land \neg q) & assumption\\
+        \begin{subproof}
+            p & assumption\\
+            \begin{subproof}
+                \neg q & assumption\\
+                p \land \neg q & $\land\mathrm{i}$, 3, 4\\
+                \bot & $\neg\mathrm{e}$, 5, 2
+            \end{subproof}
+            \neg\neg q & $\neg\mathrm{i}$, 4--6\\
+            q & $\neg\neg\mathrm{e}$, 6
+        \end{subproof}
+        p \to q & $\to\mathrm{i}$, 3--7\\
+        \bot & $\neg\mathrm{e}$, 9, 1
+    \end{subproof}
+    \neg\neg (p \land \neg q) & $\neg\mathrm{i}$, 2--10\\ 
+    p \land \neg q & $\neg\neg\mathrm{e}$, 12
+\end{logicproof}
+
+
+Prove: $\neg \forall x . A \vdash \exists x . \neg A$
+\begin{logicproof}{3}
+    \neg \forall x . A & premise\\
+    \begin{subproof}
+        \neg \exists x . \neg A & assumption\\
+        \begin{subproof}
+            xo & \\
+            \begin{subproof}
+                \neg A & assumption\\
+                \exists x . \neg A & $\exists\mathrm{i}$, 4\\
+                \bot & $\neg\mathrm{e}$, 5, 2
+            \end{subproof}
+            A & $PBC$, 4--6
+        \end{subproof}
+        \forall x . A & $\forall\mathrm{i}$, 3--7\\
+        \bot & $\neg\mathrm{e}$, 8, 1
+    \end{subproof}
+    \exists x . \neg A & $PBC$, 2--9
+\end{logicproof}
+
+\newpage
+
+Prove: $\neg\exists x . A \vdash \forall x . \neg A$
+\begin{logicproof}{3}
+    \neg\exists x . A\\
+    \begin{subproof}
+        \neg \forall x . \neg A & assumption\\
+        \begin{subproof}
+            xo & \\
+            \begin{subproof}
+                A & assumption\\
+                \exists x . A & $\exists\mathrm{i}$, 4\\
+                \bot & $\neg\mathrm{e}$, 5,1
+            \end{subproof}
+            \neg A & $\neg\mathrm{i}$, 4--6
+        \end{subproof}
+        \forall x . \neg A & $\forall\mathrm{i}$, 3--7\\
+        \bot & $\neg\mathrm{e}$, 8, 2
+    \end{subproof}
+    \forall x . \neg A & $PBC$, 2--9
+\end{logicproof}
+
+%Prove: $\neg \exists x . A \vdash \exists x . \neg A$
+%\begin{logicproof}{3}
+%    \neg \exists x . A  & premise\\
+%    \begin{subproof}
+%        \neg \exists x. \neg A & assumption\\
+%        \begin{subproof}
+%            xo & \\
+%            \begin{subproof}
+%                \neg A & assumption\\
+%                \exists x . \neg A & $\exists\mathrm{i}$, 4\\
+%                \bot & $\neg\mathrm{e}$, 5, 2
+%            \end{subproof}
+%            A & $PBC$, 4--6
+%        \end{subproof}
+%        \forall x. A & $\forall\mathrm{i}$, 3--7\\
+%        A & $\forall\mathrm{e}$, 8\\
+%        \exists x. A & $\exists\mathrm{i}$, 9\\
+%        \bot & $\neg\mathrm{e}$, 10, 1
+%    \end{subproof}
+%    \exists x. \neg A & $PBC$, 2--11
+%\end{logicproof}
+%
+%
+%Prove: $\neg \forall x . A \vdash \forall x . \neg A$
+%\begin{logicproof}{3}
+%    \neg \forall x . A  & premise\\
+%    \begin{subproof}
+%        \neg \forall x. \neg A & assumption\\
+%        \exists x. \neg\neg A & $\neg \forall x . A \to \exists x . \neg A$, 2\\
+%        \begin{subproof}
+%            xo & \\
+%            \neg\neg A & assumption\\
+%            A & $\neg\neg\mathrm{e}$, 5
+%        \end{subproof}
+%        \forall x. A & $\forall\mathrm{i}$, 4--6\\
+%        \bot & $\neg\mathrm{e}$, 7, 1
+%    \end{subproof}
+%    \forall x. \neg A & $PBC$, 2--8
+%\end{logicproof}
+%
+%Prove: $\forall x. \neg A \to \neg\forall x . A$
+%\begin{logicproof}{1}
+%    \forall x. \neg A & premise\\
+%    \begin{subproof}
+%        \neg\neg\forall x . A & assumption\\
+%        \forall x . A & $\neg\neg\mathrm{e}$, 2\\
+%        A & $\forall\mathrm{e}$, 3\\
+%        \neg A & $\forall\mathrm{e}$, 1\\
+%        \bot & $\neg\mathrm{e}$, 4, 5
+%    \end{subproof}
+%    \neg\forall x . A & $PBC$, 2--6
+%\end{logicproof}
+%
+%Prove: $\exists x. \neg A \to \neg\exists x . A$
+%\begin{logicproof}{3}
+%    \exists x. \neg A & premise\\
+%    \begin{subproof}
+%        \neg\neg\exists x . A & assumption\\
+%        \exists x . A & $\neg\neg\mathrm{e}$, 2\\
+%        \begin{subproof}
+%            xo & \\
+%            A & assumption\\
+%            \begin{subproof}
+%                yo & \\
+%                \neg A & assumption\\
+%                A & copy 5\\
+%                \bot & $\neg\mathrm{e}$, 8, 7
+%            \end{subproof}
+%            \bot & $\exists\mathrm{e}$, 1, 6--9
+%        \end{subproof}
+%        \bot & $\exists\mathrm{e}$, 3, 4--10
+%    \end{subproof}
+%    \neg\exists x . A & $PBC$, 2--6
+%\end{logicproof}
+
+\section*{2022 Q2}
+
+\paragraph{(c)}
+
+%Prove: $\neg\exists x . \forall y. S(x,y) \vdash \forall x . \exists y . \neg S(x,y)$
+%\begin{logicproof}{2}
+%    \neg\exists x . \forall y. S(x,y) & premise\\
+%    \exists x . \neg\forall y. S(x,y) & $\neg\exists x . A \to \exists x . \neg A$, 1\\
+%    \begin{subproof}
+%        xo & \\
+%        \neg\forall y . S(xo, y) & assumption\\
+%        \forall y . \neg S(xo, y) & $\neg\forall x . A \to \forall x . \neg A$, 4\\
+%        \begin{subproof}
+%            yo & \\
+%            \neg S(xo, yo) & $\forall\mathrm{e}$, 5\\
+%            \exists y . \neg S(xo, y) & $\exists\mathrm{i}$, 7 
+%        \end{subproof}
+%        \forall x . \exists y . \neg S(x, y) & $\forall\mathrm{i}$, 6--8
+%    \end{subproof}
+%    \forall x . \exists y . \neg S(x,y) & $\exists\mathrm{e}$, 2, 3--9
+%\end{logicproof}
+
+Prove: $\neg\exists x . \forall y. S(x,y) \vdash \forall x . \exists y . \neg S(x,y)$
+\begin{logicproof}{3}
+    \neg\exists x . \forall y. S(x,y) & premise\\
+    \forall x . \neg \forall y. S(x,y) & $\neg\exists x . A \to \forall x . \neg A$, 1\\
+    \begin{subproof}
+        xo & \\
+        \neg \forall y. S(xo,y) & $\forall\mathrm{e}$, 2\\
+        \exists y. \neg S(xo,y) & $\neg\forall x . A \to \exists x . \neg A$, 4
+    \end{subproof}
+    \forall x . \exists y . \neg S(x,y) & $\forall\mathrm{i}$, 3--5
+\end{logicproof}
+
+\newpage
+
+Here's a slightly outdated inlined version just so you can laugh at how horrible of a proof this is\\
+Prove: $\neg\exists x . \forall y. S(x,y) \vdash \forall x . \exists y . \neg S(x,y)$
+\begin{logicproof}{5}
+    \neg\exists x . \forall y. S(x,y) & premise\\
+    \begin{subproof}
+        \neg\forall x . \neg \forall y. S(x,y) & assumption\\
+        \begin{subproof}
+            \neg \exists x . \neg\neg\forall y. S(x,y) & assumption\\
+            \begin{subproof}
+                xo & \\
+                \begin{subproof}
+                    \neg\neg\forall y . S(xo, y) & assumption\\
+                    \exists x . \neg\neg\forall y . S(x, y) & $\exists\mathrm{i}$, 5\\
+                    \bot & $\neg\mathrm{e}$, 6, 3
+                \end{subproof}
+                \neg\forall y . S(xo, y) & $PBC$, 5--7\\
+                \exists x . \neg\forall y . S(x, y) & $\exists\mathrm{i}$, 8\\
+                \bot & $\neg\mathrm{e}$, 9, 1
+            \end{subproof}
+            \forall x . \bot & $\forall\mathrm{i}$, 4--10\\
+            \bot & $\forall\mathrm{e}$, 11
+        \end{subproof}
+        \exists x . \neg\neg\forall y. S(x,y) & $PBC$, 3--12\\
+        \begin{subproof}
+            xo & \\
+            \neg\neg\forall y . S(xo,y) & assumption\\
+            \forall y . S(xo,y) & $\neg\neg\mathrm{e}$, 13\\
+            \exists x . \forall y . S(x,y) & $\exists\mathrm{i}$, 16\\
+            \bot & $\neg\mathrm{e}$, 17, 1
+        \end{subproof}
+        \bot & $\exists\mathrm{e}$, 13, 14--18
+    \end{subproof}
+    \forall x . \neg \forall y. S(x,y) & $PBC$, 2--19\\
+    \begin{subproof}
+        xo & \\
+        \neg \forall y. S(xo,y) & $\forall\mathrm{e}$, 20\\
+        \begin{subproof}
+            \neg \exists y. \neg S(xo,y) & assumption\\
+            \begin{subproof}
+                zo & \\
+                \begin{subproof}
+                    \neg S(xo, zo) & assumption\\
+                    \exists y . \neg S(xo, y) & $\exists\mathrm{i}$, 25\\
+                    \bot & $\neg\mathrm{e}$, 26, 23
+                \end{subproof}
+                S(xo, zo) & $PBC$, 25--27
+            \end{subproof}
+            \forall y. S(xo,y) & $\forall\mathrm{i}$, 24--28\\
+            \bot & $\neg\mathrm{e}$, 29, 22
+        \end{subproof}
+        \exists y. \neg S(xo,y) & $PBC$, 23--30
+    \end{subproof}
+    \forall x . \exists y . \neg S(x,y) & $\forall\mathrm{i}$, 21--31
+\end{logicproof}
+
+\section*{2021 Q2}
+
+\paragraph{(c)}
+
+This question has been done, view blackboard for solution
+
+\newpage
+
+\section*{2020 Q2}
+
+\paragraph{(c)}
+
+Prove: $\forall x . \exists y . R(x,y) \vdash \neg\forall y . \forall z . (R(a,y) \to \neg R(y,z))$
+\begin{logicproof}{4}
+    \forall x . \exists y . R(x,y) & premise\\
+    \begin{subproof}
+        \neg\neg\forall y . \forall z (R(a,y) \to \neg R(y,z)) & assumption\\
+        \forall y . \forall z . (R(a,y) \to \neg R(y,z)) & $\neg\neg\mathrm{e}$, 2\\
+        \begin{subproof}
+            xo & \\
+            \exists y . R(xo,y) & $\forall\mathrm{e}$, 1\\
+            \forall z . (R(a,xo) \to \neg R(xo,z)) & $\forall\mathrm{e}$, 3\\
+            \begin{subproof}
+                yo & \\
+                R(xo, yo) & assumption\\
+                R(a,xo) \to \neg R(xo,yo) & $\forall\mathrm{e}$, 6\\
+                \neg R(a,xo) & $MT$, 8, 9\\
+                \exists y . \neg R(a,y) & $\exists\mathrm{i}$, 10
+            \end{subproof}
+            \exists y . \neg R(a,y) & $\exists\mathrm{e}$, 5, 7--11\\
+            \begin{subproof}
+                zo & \\
+                R(xo,zo) & assumption\\
+                \begin{subproof}
+                    ao & \\
+                    \neg R(a,ao) & assumption\\
+                    R(xo,zo) & copy, 14\\
+                    R(a,ao) [ao/zo] [a/xo] & $=\mathrm{e}$, 17, $=\mathrm{e}$, 17\\
+                    \bot & $\neg\mathrm{e}$, 18, 16
+                \end{subproof}
+                \bot & $\exists\mathrm{e}$, 12, 15--19
+            \end{subproof}
+            \bot & $\exists\mathrm{e}$, 5, 13--20
+        \end{subproof}
+        \forall x . \bot & $\forall\mathrm{i}$, 4--21\\
+        \bot & $\neg\mathrm{e}$, $\forall\mathrm{e}$, 22
+    \end{subproof}
+    \neg\forall y . \forall z . (R(a,y) \to \neg R(y,z)) & $PBC$, 2--23
+\end{logicproof}
+
+\section*{2019 Q2}
+
+\paragraph{(c)}
+
+\paragraph{(i)}
+
+Prove: $\neg \forall x . D(x) \vdash \exists y . \neg D(y)$
+\begin{logicproof}{3}
+    \neg \forall x . D(x) & premise\\
+    \begin{subproof}
+        \neg \exists y . \neg D(y) & assumption\\
+        \begin{subproof}
+            yo & \\
+            \begin{subproof}
+                \neg D(yo) & assumption\\
+                \exists y . \neg D(y) & $\exists\mathrm{i}$, 4\\
+                \bot & $\neg\mathrm{e}$, 5, 2
+            \end{subproof}
+            D(yo) & $PBC$, 4--6
+        \end{subproof}
+        \forall x . D(x) & $\forall\mathrm{i}$, 3--7\\
+        \bot & $\neg\mathrm{e}$, 8, 1
+    \end{subproof}
+    \exists y . \neg D(y) & $PBC$, 2--9
+\end{logicproof}
+
+\newpage
+
+\paragraph{(ii)}
+Prove: $\vdash \exists x. (D(x) \to \forall y . D(y))$
+\begin{logicproof}{4}
+    \begin{subproof}
+        \neg \exists x. (D(x) \to \forall y . D(y)) & assumption\\
+        \begin{subproof}
+            xo & \\
+            \begin{subproof}
+                D(xo) \to \forall y . D(y) & assumption\\
+                \exists x . D(x) \to \forall y . D(y) & $\exists\mathrm{i}$, 3, 1\\
+                \bot & $\neg\mathrm{e}$, 4, 1
+            \end{subproof}
+            \neg (D(xo) \to \forall y . D(y)) & $\neg\mathrm{i}$, 3--5\\
+            \begin{subproof}
+                \forall z . D(z) & assumption\\
+                \begin{subproof}
+                    D(xo) & assumption\\
+                    \forall y . D(y) & $\forall\mathrm{i}$, 8
+                \end{subproof}
+                D(xo) \to \forall y . D(y) & $\to\mathrm{i}$, 8--9\\
+                \bot & $\neg\mathrm{e}$, 10, 6
+            \end{subproof}
+            \neg \forall z . D(z) & $\neg\mathrm{e}$, 7--11\\
+            \exists y . \neg D(y) & $\neg\forall x . D(x) \to \exists y . \neg D(y)$, 12\\
+            \begin{subproof}
+                y1 & \\
+                \neg D(y1) & assumption\\
+                \neg D(y1) \lor \forall y . D(y) & $\lor\mathrm{i}_1$, 15\\
+                D(y1) \to \forall y . D(y) & $MI$, 16\\
+                \exists x . (D(x) \to \forall y . D(y)) & $\exists\mathrm{i}$, 17\\
+                \bot & $\neg\mathrm{e}$, 18, 1
+            \end{subproof}
+            \bot & $\exists\mathrm{e}$, 13, 14--19
+        \end{subproof}
+        \forall x . \bot & $\forall\mathrm{i}$, 2--20\\
+        \bot & $\forall\mathrm{e}$, 21
+    \end{subproof}
+    \exists x. (D(x) \to \forall y . D(y)) & $PBC$, 1--22
+\end{logicproof}
+
+\newpage
+
+\section*{2018 January Q2}
+
+\paragraph{(c)}
+
+\paragraph{(i)}
+
+Prove: $\exists x . S(x) \lor \exists x . T(x) \vdash \exists x . (S(x) \lor T(x))$ 
+\begin{logicproof}{2}
+    \exists x . S(x) \lor \exists x . T(x) & premise\\
+    \begin{subproof}
+        \exists x . S(x) & assumption\\
+        \begin{subproof}
+            xo & \\
+            S(xo) & assumption\\ 
+            S(xo) \lor T(xo) & $\lor\mathrm{i}_1$, 4\\
+            \exists x . S(x) \lor T(x) & $\exists\mathrm{i}$, 5
+        \end{subproof}
+        \exists x . S(x) \lor T(x) & $\exists\mathrm{e}$, 2, 3--6 
+    \end{subproof}
+    \begin{subproof}
+        \exists x . T(x) & assumption\\
+        \begin{subproof}
+            yo & \\
+            T(yo) & assumption\\
+            S(yo) \lor T(yo) & $\lor\mathrm{i}_2$, 10\\
+            \exists x . S(x) \lor T(x) & $\exists\mathrm{i}$, 11 
+        \end{subproof}
+        \exists x . S(x) \lor T(x) & $\exists\mathrm{e}$, 8, 9--12
+    \end{subproof}
+    \exists x . (S(x) \lor T(x)) & $\lor\mathrm{e}$, 1, 2--7, 8--13
+\end{logicproof}
+
+\paragraph{(ii)}
+
+Prove: $\exists x . \exists y . (P(x,y) \lor P(y,x)), \neg \exists z . P(z, z) \vdash \neg \forall x . \forall y . (x = y)$
+\begin{logicproof}{4}
+    \exists x . \exists y . (P(x,y) \lor P(y,x)) & premise\\
+    \neg \exists z . P(z, z) & premise \\
+    \begin{subproof}
+        \neg\neg \forall x . \forall y . (x = y) & assumption\\
+        \forall x . \forall y . (x = y) & $\neg\neg\mathrm{e}$, 3\\
+        \begin{subproof}
+            xo & \\
+            \exists y . (P(xo, y) \lor P(y, xo)) & assumption\\
+            \forall y . (xo = y) & $\forall\mathrm{e}$, 4\\
+            \begin{subproof}
+                yo & \\
+                P(xo, yo) \lor P(yo, xo) & assumption\\
+                (xo = yo) & $\forall\mathrm{e}$, 7\\
+                P(xo, xo) \lor P(xo, xo) & $=\mathrm{e}$, 10, 9\\
+                \begin{subproof}
+                    P(xo, xo) & assumption\\
+                    \exists z . P(z, z) & $\exists\mathrm{i}$, 11\\
+                    \bot & $\neg\mathrm{e}$, 12, 2
+                \end{subproof}
+
+                \begin{subproof}
+                    P(xo, xo) & assumption\\
+                    \exists z . P(z, z) & $\exists\mathrm{i}$, 13\\
+                    \bot & $\neg\mathrm{e}$, 15, 2
+                \end{subproof}
+                \bot & $\lor\mathrm{e}$, 11, 12--14, 15--17
+            \end{subproof}
+            \bot & $\exists\mathrm{e}$, 6, 8--18
+        \end{subproof}
+        \bot & $\exists\mathrm{e}$, 1, 5--19
+    \end{subproof}
+    \neg \forall x . \forall y . (x = y) & $PBC$, 3--20
+\end{logicproof}
+
+\section*{2018 January Q2}
+
+\paragraph{(c)}
+
+\paragraph{(i)}
+
+Prove: $\forall x . \forall y . (R(x,y) \land \neg(x = y) \to \neg R(y, x)) \vdash \forall x . \forall y . (R(x,y) \land R(y, x) \to x = y)$
+\begin{logicproof}{5}
+    \forall x . \forall y . (R(x,y) \land \neg(x = y) \to \neg R(y, x)) & premise\\
+    \begin{subproof}
+        xo & \\
+        \forall y . (R(xo,y) \land \neg(xo = y) \to \neg R(y, xo)) & $\forall\mathrm{e}$, 1\\
+        \begin{subproof}
+            yo & \\
+            (R(xo,yo) \land \neg(xo = yo)) \to \neg R(yo, xo) & $\forall\mathrm{e}$, 3\\
+            \neg (R(xo,yo) \land \neg(xo = yo)) \lor  \neg R(yo, xo) & $MI$, 5\\
+            \begin{subproof}
+                R(xo,yo) \land R(yo, xo) & assumption\\
+                R(xo,yo) & $\land\mathrm{e}_1$, 7\\
+                \begin{subproof}
+                    \neg (R(xo,yo) \land \neg(xo = yo)) & assumption\\
+                    \neg R(xo,yo) \lor \neg\neg(xo = yo) & $TAUT 2$, 9\\
+                    \begin{subproof}
+                        \neg R(xo,yo) & assumption\\
+                        \bot & $\neg\mathrm{e}$, 11, 8\\
+                        xo = yo & $\bot\mathrm{e}$, 12
+                    \end{subproof}
+                    \begin{subproof}
+                        \neg\neg(xo = yo) & assumption\\
+                        xo = yo & $\neg\neg\mathrm{e}$, 14
+                    \end{subproof}
+                    xo = yo & $\lor\mathrm{e}$, 10, 11--13, 14--15
+                \end{subproof}
+                \begin{subproof}
+                    \neg R(yo, xo) & assumption\\
+                    R(yo, xo) & $\land\mathrm{e}_2$, 7\\
+                    \bot & $\neg\mathrm{e}$, 18, 17\\
+                    xo = yo & $\bot\mathrm{e}$, 19
+                \end{subproof}
+                xo = yo & $\lor\mathrm{e}$, 6, 9--16, 17--20
+            \end{subproof}
+            R(xo,yo) \land R(yo, xo) \to xo = yo & $\to\mathrm{i}$, 7--21
+        \end{subproof}
+        \forall y . (R(xo,y) \land R(y, xo) \to xo = y) & $\forall\mathrm{i}$, 4--22
+    \end{subproof}
+    \forall x . \forall y . (R(x,y) \land R(y, x) \to x = y) & $\forall\mathrm{i}$, 2--23
+\end{logicproof}
+
+\newpage
+
+\paragraph{(ii)}
+
+Prove: $\exists x . P(x) \to \exists y . (Q(y) \land R(y)), \exists z . (R(z) \lor S(z)) \to \forall w . T(w) \vdash \forall v . (P(v) \to T(v))$
+\begin{logicproof}{4}
+    \exists x . P(x) \to \exists y . (Q(y) \land R(y)) & premise\\
+    \exists z . (R(z) \lor S(z)) \to \forall w . T(w) & premise\\
+    \begin{subproof}
+        \neg\forall v . (P(v) \to T(v)) & assumption\\
+        \exists v . \neg (P(v) \to T(v)) & $\neg\forall x . A \to \exists x . \neg A$, 3\\
+        \begin{subproof}
+            vo & \\
+            \neg (P(vo) \to T(vo)) & assumption\\
+            P(vo) \land \neg T(vo) & $\neg\to\mathrm{e}$, 6\\
+            P(vo) & $\land\mathrm{e}_1$, 7\\
+            \neg T(vo) & $\land\mathrm{e}_2$, 7\\
+            \exists x . P(x) & $\exists\mathrm{i}$, 8\\
+            \exists y. (Q(y) \land R(y)) & $\to\mathrm{e}$, 10, 1\\
+            \begin{subproof}
+                yo & \\
+                Q(yo) \land R(yo) & assumption\\
+                R(yo) & $\land\mathrm{e}_2$, 13\\
+                R(yo) \lor S(yo) & $\lor\mathrm{i}_1$, 14\\
+                \exists z . (R(z) \lor S(z)) & $\exists\mathrm{i}$, 15\\
+                \forall w . T(w) & $\to\mathrm{e}$, 16, 2\\
+                \begin{subproof}
+                    wo & \\
+                    T(wo) & $\forall\mathrm{e}$, 17\\
+                    \bot & $\neg\mathrm{e}$, 19, 9
+                \end{subproof}
+                \forall x . \bot & $\forall\mathrm{i}$, 18--20\\
+                \bot & $\forall\mathrm{e}$, 21
+            \end{subproof}
+            \bot & $\exists\mathrm{e}$, 11, 12--22
+        \end{subproof}
+        \bot & $\exists\mathrm{e}$, 4, 5--23
+    \end{subproof}
+    \forall v . (P(v) \to T(v)) & $PBC$, 3--24
+\end{logicproof}
+
+\newpage
+
+\section*{2017}
+
+\paragraph{(i)}
+
+Prove: $\exists x . (P(x) \land \forall y . Q(x,y)) \vdash \exists z . Q(z,z)$
+\begin{logicproof}{3}
+    \exists x . (P(x) \land \forall y . Q(x,y))\\
+    \begin{subproof}
+        \neg\exists z . Q(z,z) & assumption\\
+        \forall z . \neg Q(z,z) & $\neg\exists z . A \to \forall z . \neg A$, 2\\
+        \begin{subproof}
+            xo & \\
+            P(xo) \land \forall y . Q(xo, y) [xo/z] & assumption\\
+            \forall y . Q(xo, y) & $\land\mathrm{e}_2$, 5\\
+            Q(xo, xo) [xo / y] & $\forall\mathrm{e}$, 6\\
+            \neg Q(xo, xo) [xo / z] & $\forall\mathrm{e}$, 3\\
+            \bot & $\neg\mathrm{e}$, 7, 8
+        \end{subproof}
+        \bot & $\exists\mathrm{e}$, 1, 4--9
+    \end{subproof}
+    \exists z . Q(z,z) & $PBC$, 2--10
+\end{logicproof}
+
+\paragraph{(i)}
+Prove: $\forall x. \forall y . (R(x,y) \to (x=y)) \vdash \forall z . \neg \exists w . (R(z,w) \land \neg (z = w))$
+\begin{logicproof}{4}
+    \forall x. \forall y . (R(x,y) \to (x=y)) & premise\\
+    \begin{subproof}
+        \neg \forall z . \neg \exists w . (R(z,w) \land \neg (z = w)) & assumption\\
+        \exists z . \neg\neg \exists w . (R(z,w) \land \neg (z = w)) & $\neg\forall x . A \to \exists x . \neg A$, 2\\
+        \begin{subproof}
+            zo & \\ 
+            \neg\neg \exists w . (R(zo,w) \land \neg (zo = w)) & assumption\\
+            \exists w . (R(zo,w) \land \neg (zo = w)) & $\neg\neg\mathrm{e}$, 5\\
+            \forall y . (R(zo,y) \to (zo=y)) & $\forall\mathrm{e}$, 1\\
+            \begin{subproof}
+                wo & \\
+                R(zo,wo) \land \neg (zo = wo) & assumption\\
+                R(zo,wo) \to (zo=wo) & $\forall\mathrm{e}$, 7\\
+                \neg R(zo,wo) \lor (zo=wo) & $MI$, 10\\
+                \begin{subproof}
+                    \neg R(zo, wo) & assumption\\
+                    R(zo, wo) & $\land\mathrm{e}_1$, 9\\
+                    \bot & $\neg\mathrm{e}$, 13, 12
+                \end{subproof}
+                \begin{subproof}
+                    (zo=yo) & assumption\\
+                    \neg (zo = wo) & $\land\mathrm{e}_2$, 9\\
+                    \bot & $\neg\mathrm{e}$, 15, 16
+                \end{subproof}
+                \bot & $\lor\mathrm{e}$, 11, 12--14, 15--17
+            \end{subproof}
+            \bot & $\exists\mathrm{e}$, 6, 8--18
+        \end{subproof}
+        \bot & $\exists\mathrm{e}$, 3, 4--19
+    \end{subproof}
+    \forall z . \neg \exists w . (R(z,w) \land \neg (z = w)) & $PBC$, 2--20
+\end{logicproof}
+
+\newpage
+
+\section*{2016}
+
+\paragraph{(c)}
+
+\paragraph{(i)}
+
+Prove: $\forall x . \forall y . (P(y) \to Q(x)) \vdash \exists y . P(y) \to \forall x . Q(x)$
+\begin{logicproof}{3}
+    \forall x . \forall y . (P(y) \to Q(x)) & premise\\
+    \begin{subproof}
+        \neg (\exists y . P(y) \to \forall x . Q(x)) & assumption\\
+        \exists y . P(y) \land \neg \forall x. Q(x) & $\neg\to\mathrm{e}$, 2\\
+        \exists y . P(y) & $\land\mathrm{e}_1$, 3\\
+        \neg \forall x. Q(x) & $\land\mathrm{e}_2$, 3\\
+        \exists x . \neg Q(x) & $\neg\forall x . A \to \exists x . \neg A$, 5\\
+        \begin{subproof}
+            yo & \\
+            P(yo) & assumption\\
+            \begin{subproof}
+                xo & \\
+                \forall y . (P(y) \to Q(xo)) & $\forall\mathrm{e}$, 1\\
+                P(yo) \to Q(xo) & $\forall\mathrm{e}$, 10\\
+                Q(xo) & $\to\mathrm{e}$, 9, 11
+            \end{subproof}
+            \forall x . Q(x) & $\forall\mathrm{i}$, 8--12\\
+            \bot & $\neg\mathrm{e}$, 13, 5
+        \end{subproof}
+        \bot & $\exists\mathrm{e}$, 4, 7--14
+    \end{subproof}
+    \exists y . P(y) \to \forall x . Q(x) & $PBC$, 2--15
+\end{logicproof}
+
+\newpage
+
+\paragraph{(ii)}
+
+Prove: $\exists x . \exists y . (H(x,y) \lor H(y, x)), \neg \exists z . H(z,z) \vdash \exists x . \exists y . \neg(x = y)$
+\begin{logicproof}{4}
+    \exists x . \exists y . (H(x,y) \lor H(y, x)) & premise\\
+    \neg \exists z . H(z,z) & premise\\
+    \forall z . \neg H(z,z) & $\neg\exists x . A \to \forall x . \neg A$, 2\\
+    \begin{subproof}
+        \neg\exists x . \exists y . \neg(x = y) & assumption\\
+        \forall x . \neg\exists y . \neg(x=y) & $\neg\exists x . A \to \forall x . \neg A$, 4\\
+        \begin{subproof}
+            xo & \\
+            \exists y . (H(xo,y) \lor H(y,xo)) & assumption\\
+            \neg H(xo, xo) & $\forall\mathrm{e}$, 3\\
+            \neg \exists y . \neg(xo=y) & $\forall\mathrm{e}$, 5\\
+            \forall y . \neg\neg(xo=y) & $\neg\exists x . A \to \forall x . \neg A$, 9\\
+            \begin{subproof}
+                yo & \\
+                H(xo, yo) \lor H(yo, xo) & assumption\\
+                \neg\neg(xo=yo) & $\forall\mathrm{e}$, 10\\
+                xo=yo & $\forall\mathrm{e}$, 10\\
+                yo=xo & $=sym$, 14\\
+                H(xo, xo) \lor H(xo, xo) [xo / yo] & $=\mathrm{e}$, 15, 12\\
+                \begin{subproof}
+                    H(xo, xo) & assumption\\
+                    \bot & $\neg\mathrm{e}$, 17, 8
+                \end{subproof}
+                \begin{subproof}
+                    H(xo, xo) & assumption\\
+                    \bot & $\neg\mathrm{e}$, 19, 8
+                \end{subproof}
+                \bot & $\lor\mathrm{e}$, 16, 17--18, 19--20
+            \end{subproof}
+            \bot & $\exists\mathrm{e}$, 7, 11--21
+        \end{subproof}
+        \bot & $\exists\mathrm{e}$, 1, 6--22
+    \end{subproof}
+    \exists x . \exists y . \neg(x = y) & $PBC$, 4--24
+\end{logicproof}
+
+\section*{2015}
+
+\paragraph{(d)}
+
+
+Prove: $\neg\forall x. \neg P(x) \dashv \vdash \exists x . P(x)$\\
+I will prove this without using my proofs from the start ($\neg\forall x . A \to \exists x . \neg A$)
+
+First prove: $\neg\forall x. \neg P(x) \vdash \exists x . P(x)$
+\begin{logicproof}{3}
+    \neg\forall x. \neg P(x) & premise\\
+    \begin{subproof}
+        \neg \exists x . P(x) & assumption\\
+        \begin{subproof}
+            xo & \\ 
+            \begin{subproof}
+                P(xo) & assumption\\
+                \exists x . P(x) & $\exists\mathrm{i}$, 4\\
+                \bot & $\neg\mathrm{e}$, 5, 2
+            \end{subproof}
+            \neg P(xo) & $\neg\mathrm{i}$, 4--??
+        \end{subproof}
+        \forall x . \neg P(x) & $\forall\mathrm{i}$, 3--7\\
+        \bot & $\neg\mathrm{e}$, 8, 1
+    \end{subproof}
+    \exists x . P(x) & $PBC$, 2--9
+\end{logicproof}
+
+\newpage
+
+Lastly prove: $\neg\forall x. \neg P(x) \dashv \exists x . P(x)$
+\begin{logicproof}{3}
+    \exists x . P(x) & premise\\
+    \begin{subproof}
+        \neg\neg\forall x. \neg P(x) & assumption\\
+        \forall x. \neg P(x) & $\neg\neg\mathrm{e}$, 2\\
+        \begin{subproof}
+            xo & \\
+            P(xo) & assumption\\
+            \neg P(xo) & $\forall\mathrm{e}$, 3\\
+            \bot & $\neg\mathrm{e}$, 5, 6
+        \end{subproof}
+        \bot & $\exists\mathrm{e}$, 1, 4--7
+    \end{subproof}
+    \neg\forall x. \neg P(x) & $PBC$, 2--8
+\end{logicproof}
+
+\end{document} 
