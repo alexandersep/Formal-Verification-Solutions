@@ -3,3 +3,5 @@ This repository will contain the 8 years of solutions to the exam paper for Form
 
 ## Solutions so far
 * Natural Deduction
+* First Order Natural Deduction
+* Hoare Logic
