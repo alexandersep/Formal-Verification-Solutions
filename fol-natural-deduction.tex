@@ -22,10 +22,6 @@ I will create helper proofs for future questions:\\
 $\neg\to\mathrm{e}$\\
 $\neg\forall x . A \to \exists x . \neg A$,\\
 $\neg\exists x . A \to \forall x . \neg A$,\\
-%$\neg\exists x . A \to \exists x . \neg A$,\\
-%$\neg\forall x . A \to \forall x . \neg A$\\
-%$\forall x. \neg A \to \neg\forall x . A$,\\
-%$\exists x. \neg A \to \neg\exists x . A$,\\
 
 Prove: $\neg (p \to q) \vdash p \land \neg q$
 \begin{logicproof}{3}
@@ -92,102 +88,9 @@ Prove: $\neg\exists x . A \vdash \forall x . \neg A$
     \forall x . \neg A & $PBC$, 2--9
 \end{logicproof}
 
-%Prove: $\neg \exists x . A \vdash \exists x . \neg A$
-%\begin{logicproof}{3}
-%    \neg \exists x . A  & premise\\
-%    \begin{subproof}
-%        \neg \exists x. \neg A & assumption\\
-%        \begin{subproof}
-%            xo & \\
-%            \begin{subproof}
-%                \neg A & assumption\\
-%                \exists x . \neg A & $\exists\mathrm{i}$, 4\\
-%                \bot & $\neg\mathrm{e}$, 5, 2
-%            \end{subproof}
-%            A & $PBC$, 4--6
-%        \end{subproof}
-%        \forall x. A & $\forall\mathrm{i}$, 3--7\\
-%        A & $\forall\mathrm{e}$, 8\\
-%        \exists x. A & $\exists\mathrm{i}$, 9\\
-%        \bot & $\neg\mathrm{e}$, 10, 1
-%    \end{subproof}
-%    \exists x. \neg A & $PBC$, 2--11
-%\end{logicproof}
-%
-%
-%Prove: $\neg \forall x . A \vdash \forall x . \neg A$
-%\begin{logicproof}{3}
-%    \neg \forall x . A  & premise\\
-%    \begin{subproof}
-%        \neg \forall x. \neg A & assumption\\
-%        \exists x. \neg\neg A & $\neg \forall x . A \to \exists x . \neg A$, 2\\
-%        \begin{subproof}
-%            xo & \\
-%            \neg\neg A & assumption\\
-%            A & $\neg\neg\mathrm{e}$, 5
-%        \end{subproof}
-%        \forall x. A & $\forall\mathrm{i}$, 4--6\\
-%        \bot & $\neg\mathrm{e}$, 7, 1
-%    \end{subproof}
-%    \forall x. \neg A & $PBC$, 2--8
-%\end{logicproof}
-%
-%Prove: $\forall x. \neg A \to \neg\forall x . A$
-%\begin{logicproof}{1}
-%    \forall x. \neg A & premise\\
-%    \begin{subproof}
-%        \neg\neg\forall x . A & assumption\\
-%        \forall x . A & $\neg\neg\mathrm{e}$, 2\\
-%        A & $\forall\mathrm{e}$, 3\\
-%        \neg A & $\forall\mathrm{e}$, 1\\
-%        \bot & $\neg\mathrm{e}$, 4, 5
-%    \end{subproof}
-%    \neg\forall x . A & $PBC$, 2--6
-%\end{logicproof}
-%
-%Prove: $\exists x. \neg A \to \neg\exists x . A$
-%\begin{logicproof}{3}
-%    \exists x. \neg A & premise\\
-%    \begin{subproof}
-%        \neg\neg\exists x . A & assumption\\
-%        \exists x . A & $\neg\neg\mathrm{e}$, 2\\
-%        \begin{subproof}
-%            xo & \\
-%            A & assumption\\
-%            \begin{subproof}
-%                yo & \\
-%                \neg A & assumption\\
-%                A & copy 5\\
-%                \bot & $\neg\mathrm{e}$, 8, 7
-%            \end{subproof}
-%            \bot & $\exists\mathrm{e}$, 1, 6--9
-%        \end{subproof}
-%        \bot & $\exists\mathrm{e}$, 3, 4--10
-%    \end{subproof}
-%    \neg\exists x . A & $PBC$, 2--6
-%\end{logicproof}
-
 \section*{2022 Q2}
 
 \paragraph{(c)}
-
-%Prove: $\neg\exists x . \forall y. S(x,y) \vdash \forall x . \exists y . \neg S(x,y)$
-%\begin{logicproof}{2}
-%    \neg\exists x . \forall y. S(x,y) & premise\\
-%    \exists x . \neg\forall y. S(x,y) & $\neg\exists x . A \to \exists x . \neg A$, 1\\
-%    \begin{subproof}
-%        xo & \\
-%        \neg\forall y . S(xo, y) & assumption\\
-%        \forall y . \neg S(xo, y) & $\neg\forall x . A \to \forall x . \neg A$, 4\\
-%        \begin{subproof}
-%            yo & \\
-%            \neg S(xo, yo) & $\forall\mathrm{e}$, 5\\
-%            \exists y . \neg S(xo, y) & $\exists\mathrm{i}$, 7 
-%        \end{subproof}
-%        \forall x . \exists y . \neg S(x, y) & $\forall\mathrm{i}$, 6--8
-%    \end{subproof}
-%    \forall x . \exists y . \neg S(x,y) & $\exists\mathrm{e}$, 2, 3--9
-%\end{logicproof}
 
 Prove: $\neg\exists x . \forall y. S(x,y) \vdash \forall x . \exists y . \neg S(x,y)$
 \begin{logicproof}{3}
