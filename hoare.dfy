@@ -1,5 +1,3 @@
-/* Created by Alexander Sepelenco */
-
 /* Question 1 2022 */
 
 /*
