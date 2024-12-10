@@ -1,3 +1,68 @@
+/* Question 1 2023 */
+
+/*
+Execution
+
+when flag = true
+| i | s         | flag |
+|---|-----------| true |
+| 0 | [0, 0, 0] | true |
+| 1 | [0, 0, 0] | true |
+| 2 | [0, 0, 0] | true |
+
+when flag = false
+| i | s         | flag  |
+|---|-----------|-------|
+| 0 | [0, 1, 0] | true  |
+| 1 | [0, 1, 0] | false |
+| 2 | [0, 1, 0] | false |
+*/
+
+predicate P(s: seq<int>, x: int)
+{
+    x <= |s| && (forall i :: 0 <= i < x ==> s[i] == 0)
+}
+
+method isZ(s: seq<int>) returns (flag: bool)
+requires |s| > 0
+ensures flag == true ==> P(s, |s|)
+{
+    assert |s| > 0;
+    assert true ==> 0 <= |s|;
+    assert true ==> (0 <= |s| && true);
+    assert true ==> (0 <= |s| && (forall i :: false ==> s[i] == 0));
+    assert true ==> (0 <= |s| && (forall i :: 0 <= 0 < 0 ==> s[i] == 0));
+    assert true ==> P(s, 0);
+    flag := true;
+    assert flag ==> P(s, 0);
+    var i := 0;
+    assert flag ==> P(s, i);
+    while (i < |s|)
+    decreases |s| - i
+    invariant 0 <= i <= |s|
+    invariant flag ==> P(s, i)
+    {
+        assert (s[i] != 0 ==> true) && (s[i] == 0 ==> (flag == true ==> P(s, i + 1)));
+        if s[i] != 0 {
+            assert true;
+            assert false ==> P(s, i + 1);
+            assert false == true ==> P(s, i + 1);
+            flag := false;
+            assert flag == true ==> P(s, i + 1);
+        } else {
+            assert flag == true ==> P(s, i + 1);
+            flag := flag;
+            assert flag == true ==> P(s, i + 1);
+        }
+        assert flag == true ==> P(s, i + 1);
+        i := i + 1;
+        assert flag == true ==> P(s, i);
+    }
+    assert i == |s|;
+    assert flag == true ==> P(s, i);
+    assert flag == true ==> P(s, |s|);
+}
+
 /* Question 1 2022 */
 
 /*
